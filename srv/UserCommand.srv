@@ -1,0 +1,5 @@
+string mode
+float32 v_forward
+float32 w_yaw
+---
+string outcome

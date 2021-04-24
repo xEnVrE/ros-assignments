@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<launch>
+	<include file="$(find robot_description)/launch/sim_w1.launch"></include>
+
+
+    <arg name="des_x" default= "1"/>
+    <arg name="des_y" default= "1"/>
+    <param name="des_pos_x" value="$(arg des_x)" />
+    <param name="des_pos_y" value="$(arg des_y)" />
+    <node pkg="robot_description" type="wall_follow_service_m.py" name="wall_follower" />
+    <node pkg="robot_description" type="go_to_point_service_m.py" name="go_to_point"/>
+    <node pkg="ros_assignments" type="user_interface.py" name="user_interface"/>
+    <node pkg="ros_assignments" type="position_generator_service.py" name="position_generator"/>
+    <node pkg="ros_assignments" type="controller.py" name="controller" output="screen"/>
+</launch>

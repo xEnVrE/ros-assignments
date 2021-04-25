@@ -17,6 +17,7 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(Curses REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
@@ -26,6 +27,12 @@ add_executable(position_generation_server src/position_generation_service.cpp)
 ament_target_dependencies(position_generation_server rclcpp)
 rosidl_target_interfaces(position_generation_server ros_assignments "rosidl_typesupport_cpp")
 install(TARGETS position_generation_server DESTINATION lib/ros_assignments)
+
+add_executable(user_interface src/user_interface.cpp)
+target_link_libraries(user_interface ${CURSES_LIBRARIES})
+ament_target_dependencies(user_interface rclcpp)
+rosidl_target_interfaces(user_interface ros_assignments "rosidl_typesupport_cpp")
+install(TARGETS user_interface DESTINATION lib/ros_assignments)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

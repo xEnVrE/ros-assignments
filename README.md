@@ -127,7 +127,7 @@ source $ROS2_WS/install/setup.bash
 ros2 run ros_assignments position_generation_server
 ```
 
-6. On a separate terminal (sharing the same configuration as `t2`)
+6. On a separate terminal (sharing the same configuration as `t2`) run the interactive user interface:
 ```
 ros2 run ros_assignments user_interface
 ```

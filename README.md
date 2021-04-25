@@ -5,7 +5,7 @@ Assignments for RPwR course
 
 - [CarmineD8/robot_description](https://github.com/CarmineD8/robot_description)
 - `curses` available from Python (Ubuntu has built-in support for that)
-- `libncurses6` (use `apt install libncurses6`)
+- `libncurses6` (use `apt install libncurses5-dev `)
 
 Please copy appropriate folders in the ROS and ROS2 workspaces, assumed to be `$ROS_WS` and `$ROS2_WS`:
 ```

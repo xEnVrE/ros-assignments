@@ -33,6 +33,7 @@ regions_ = None
 state_desc_ = ['Go to point', 'wall following', 'new random point requested', 'joystick mode', 'idle']
 state_ = 0
 mode_ = 'idle'
+random_mode_requested_ = False
 desired_v_ = 0.0
 desired_w_ = 0.0
 mutex_ = Lock()
@@ -73,6 +74,7 @@ def clbk_user_command(request):
     global mode_
     global desired_v_
     global desired_w_
+    global random_mode_requested_
 
     mode = ''
     outcome = 'Success.'
@@ -91,7 +93,9 @@ def clbk_user_command(request):
             change_state(3)
 
         elif mode == 'random':
-            change_state(2)
+            # change_state(2) should be called but it will cause calling a ROS2 service
+            # before returning the answer to this service call, hence it is deferred to the main loop
+            random_mode_requested_ = True
 
     else:
         outcome = 'Failed. Available modes are ' + str(available_modes) + '.'
@@ -112,14 +116,17 @@ def send_velocity(v_forward, w_yaw):
 def get_state():
     global state_
     global mutex_
+    global random_mode_requested_
 
     state = None
+    random_mode_requested = None
 
     mutex_.acquire()
     state = state_
+    random_mode_requested = random_mode_requested_
     mutex_.release()
 
-    return state
+    return state, random_mode_requested
 
 
 def get_desired_position():
@@ -148,6 +155,14 @@ def get_desired_velocity():
     mutex_.release()
 
     return desired_v, desired_w
+
+
+def clear_random_mode_requested():
+    global random_mode_requested_
+
+    mutex_.acquire()
+    random_mode_requested_ = False
+    mutex_.release()
 
 
 def change_state(state):
@@ -243,9 +258,14 @@ def main():
 
         # rospy.loginfo(state_)
 
-        state = get_state()
+        state, random_mode_requested = get_state()
         desired_position = get_desired_position()
         desired_v, desired_w = get_desired_velocity()
+
+        # Check if random mode has been requested
+        if random_mode_requested:
+            change_state(2)
+            clear_random_mode_requested()
 
         if state == 0:
             err_pos = math.sqrt(pow(desired_position.y - position_.y,

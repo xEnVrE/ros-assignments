@@ -111,10 +111,24 @@ source $ROS_WS/devel/setup.bash
 source $ROS2_WS/install/setup.bash
 ```
 
-3. Run the bridge in `t1`:
+3. Run the ROS/ROS2 bridge in `t1`:
 ```
 ros2 run ros1_bridge dynamic_bridge --bridge-all-topics
 ```
 
+4. Open a terminal `t2` and source the ROS2 hybrid environment (if not already done):
+```
+source /opt/ros/foxy/setup.bash 
+source $ROS2_WS/install/setup.bash
+```
 
+5. Run the position generator service from `t2`
+```
+ros2 run ros_assignments position_generation_server
+```
+
+6. On a separate terminal (sharing the same configuration as `t2`)
+```
+ros2 run ros_assignments user_interface
+```
 

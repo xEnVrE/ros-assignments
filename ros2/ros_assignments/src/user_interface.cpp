@@ -56,7 +56,7 @@ private:
             mvaddstr(7 , 4, "     ^    ");
             mvaddstr(8 , 4, " _   |   _");
         }
-        else if (robot_status_ == "idle")
+        else
         {
             mvaddstr(7 , 4, "          ");
             mvaddstr(8 , 4, " _       _");
@@ -80,7 +80,7 @@ private:
             mvaddstr(17 , 4, "     |    ");
             mvaddstr(18 , 4, "     V    ");
         }
-        else if (robot_status_ == "idle")
+        else
         {
             mvaddstr(17 , 4, "          ");
             mvaddstr(18 , 4, "          ");
@@ -112,6 +112,8 @@ private:
 
     void update()
     {
+        last_robot_status_ = robot_status_;
+
         char c = getch();
         switch (c)
         {
@@ -128,6 +130,7 @@ private:
 
         case 'i':
             status_ = "idle";
+            robot_status_ = "idle";
 
             break;
 
@@ -168,18 +171,18 @@ private:
         {
             elapsed_ += period_ / 1000.0;
 
-            if (last_sent_ != "joystick")
+            if ((last_sent_ != "joystick") || (robot_status_ != last_robot_status_))
             {
                 send_command("joystick", v_forward_, w_yaw_);
                 last_sent_ = "joystick";
             }
 
-            if ((elapsed_ > 0.3) && (c != 'w') && (c != 'a') && (c != 's') && (c != 'd'))
-            {
-                elapsed_ = 0.0;
-                status_ = "idle";
-                robot_status_ = "idle";
-            }
+            // if ((elapsed_ > 0.3) && (c != 'w') && (c != 'a') && (c != 's') && (c != 'd'))
+            // {
+            //     elapsed_ = 0.0;
+            //     status_ = "idle";
+            //     robot_status_ = "idle";
+            // }
         }
 
         if (status_ == "idle")
@@ -220,6 +223,7 @@ private:
     double v_forward_ = 0.0;
     double w_yaw_ = 0.0;
     std::string robot_status_ = "idle";
+    std::string last_robot_status_ = "idle";
 };
 
 

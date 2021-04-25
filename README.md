@@ -57,7 +57,7 @@ You will need two separate environments for ROS and ROS2.
 
 The simulation environment will be hosted in the ROS environment. The position generation service and the user interface are made using ROS2 C++ nodes.
 
-The user interface requires `libncurses6`. Also, you need to clone `ros1_bridge` in the ROS2 environment:
+The user interface requires `libncurses`. Also, you need to clone `ros1_bridge` in the ROS2 environment:
 
 ```
 cd $ROS2_WS

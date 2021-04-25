@@ -100,7 +100,7 @@ source $ROS_WS/devel/setup.bash
 
 1. Run the simulation environment in `t0`:
 ```
-roslaunch ros_assignments exercise.launch
+roslaunch ros_assignments exercise_ros2.launch
 ```
 
 2. Open a terminal `t1` and source the ROS/ROS2 hybrid environment (if not already done):

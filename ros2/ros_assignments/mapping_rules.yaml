@@ -1,0 +1,17 @@
+- ros1_package_name: "ros_assignments"
+  ros1_message_name: "PositionGenerator"
+  ros2_package_name: "ros_assignments"
+  ros2_package_name: "PositionGenerator"
+  fields_1_to_2:
+    x: 'x'
+    y: 'y'
+
+- ros1_package_name: "ros_assignments"
+  ros1_message_name: "UserCommand"
+  ros2_package_name: "ros_assignments"
+  ros2_package_name: "UserCommand"
+  fields_1_to_2:
+    mode: 'mode'
+    v_forward: 'v_forward'
+    w_yaw: 'w_yaw'
+    outomce: 'outcome'

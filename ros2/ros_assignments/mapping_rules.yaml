@@ -14,4 +14,4 @@
     mode: 'mode'
     v_forward: 'v_forward'
     w_yaw: 'w_yaw'
-    outomce: 'outcome'
+    outcome: 'outcome'

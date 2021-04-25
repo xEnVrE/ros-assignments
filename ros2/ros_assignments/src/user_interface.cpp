@@ -118,6 +118,7 @@ private:
         switch (c)
         {
         case 'q':
+            send_command("idle");
             close();
             exit(EXIT_SUCCESS);
 

@@ -90,7 +90,7 @@ cd $ROS2_WS
 colcon build --packages-select ros1_bridge --cmake-force-configure
 ```
 
-# How to run
+## How to run
 
 0. Open a terminal `t0` and source the ROS environment (if not already done):
 ```
@@ -122,7 +122,7 @@ source /opt/ros/foxy/setup.bash
 source $ROS2_WS/install/setup.bash
 ```
 
-5. Run the position generator service from `t2`
+5. Run the position generator service from `t2`:
 ```
 ros2 run ros_assignments position_generation_server
 ```

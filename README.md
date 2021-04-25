@@ -27,7 +27,7 @@ catkin_make
 source $ROS_WS/devel/setup.bash
 ```
 
-# How to run
+## How to run
 
 0. Open a terminal `t0` and source the ROS environment (if not already done)
 ```
